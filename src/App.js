@@ -1,25 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
-import { useFetchAPI } from './utils/useFetchAPI';
+import useGetAPIData from './utils/useGetAPIData';
+import * as api from './api/api'
+
+const apiList = [ 
+  api.busMotion('Taichung', '105'),
+  api.busRoute('Taichung'),
+  api.busRoute('Taipei'),
+  api.busOperator('Taichung'),
+  // api.TaichungRoadConstructionData,
+];
 
 function App() {
-  let data = useFetchAPI('Taichung');
+  const { isLoading, data } = useGetAPIData(apiList);
+  if( isLoading ) return(<div>loading...</div>);
   console.log(data);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ol>
+          {
+            data.map((item)=>(
+              <li>{ !item ? 'no data' : 'got data' }</li>
+            ))
+          }
+        </ol>
       </header>
     </div>
   );
