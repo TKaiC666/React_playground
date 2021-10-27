@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-
-const fetchingAPI = async apiPromise => {
-  let apiPromiseResult = null;
-  await apiPromise()
-    .then(res => {
-      apiPromiseResult = res.data;
+import { useState, useEffect } from "react";
+//Test
+const fetchingAPI = async ( apiPromise )=>{
+    let apiPromiseResult = null;
+    await apiPromise()
+    .then((res)=>{
+        apiPromiseResult = res.data;
     })
     .catch(error => {
       console.log(error);
