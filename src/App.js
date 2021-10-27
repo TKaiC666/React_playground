@@ -1,13 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 import useGetAPIData from './utils/useGetAPIData';
-import * as api from './api/api'
+import * as api from './static/api'
 
 const apiList = [ 
   api.busMotion('Taichung', '105'),
+  api.busMotion('Taichung', '93'),
   api.busRoute('Taichung'),
-  api.busRoute('Taipei'),
   api.busOperator('Taichung'),
+  api.busRoute('Taipei'),
+  api.busOperator('Taipei'),
   // api.TaichungRoadConstructionData,
 ];
 
