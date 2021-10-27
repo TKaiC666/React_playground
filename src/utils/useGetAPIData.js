@@ -6,26 +6,27 @@ const fetchingAPI = async ( apiPromise )=>{
     .then((res)=>{
         apiPromiseResult = res.data;
     })
-    .catch((error)=>{
-        console.error(`Fail to get API, ${error}`);
+    .catch(error => {
+      console.log(error);
+      console.error(`Fail to get API, ${error}`);
     });
-    return apiPromiseResult;
-}
+  return apiPromiseResult;
+};
 
-const useGetAPIData = ( apiList )=>{
-    const [ apiResult, setApiResult ] = useState({
-      isLoading: true,
-      data: null  
+const useGetAPIData = apiList => {
+  const [apiResult, setApiResult] = useState({
+    isLoading: true,
+    data: null,
+  });
+  useEffect(() => {
+    Promise.all(apiList.map(api => fetchingAPI(api))).then(res => {
+      setApiResult({
+        isLoading: false,
+        data: res,
+      });
     });
-    useEffect(()=>{
-      Promise.all(apiList.map((api)=>fetchingAPI(api))).then((res)=>{
-        setApiResult({
-          isLoading: false,
-          data: res,
-        });
-      })
-    },[]);
-    return apiResult;
-}
+  }, []);
+  return apiResult;
+};
 
 export default useGetAPIData;
