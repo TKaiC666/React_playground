@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 //Test
-const fetchingAPI = async ( apiPromise )=>{
-    let apiPromiseResult = null;
-    await apiPromise()
-    .then((res)=>{
-        apiPromiseResult = res.data;
+const fetchingAPI = async apiPromise => {
+  let apiPromiseResult = null;
+  await apiPromise()
+    .then(res => {
+      apiPromiseResult = res.data;
     })
     .catch(error => {
+      console.log(error);
       console.log(error);
       console.error(`Fail to get API, ${error}`);
     });
